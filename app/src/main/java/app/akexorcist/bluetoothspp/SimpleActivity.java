@@ -112,7 +112,11 @@ public class SimpleActivity extends Activity {
 //        		bt.send("Text", true);
                 GarminHUD hud = new GarminHUD(bt);
                 hud.SetDirection(eOutAngle.EasyRight);
-                String message = hud.getSendResult() ? "Send to Garmin HUD success" : "Send to Garmin HUD failed";
+                final boolean result = hud.getSendResult();
+                String message = result ? "Send to Garmin HUD success" : "Send to Garmin HUD failed";
+                if(!result) {
+                    message+="\nerror code:"+    hud.getErrorCode();
+                }
                 Toast.makeText(getApplicationContext()
                         , message, Toast.LENGTH_SHORT).show();
             }

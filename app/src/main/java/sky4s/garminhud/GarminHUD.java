@@ -49,8 +49,15 @@ public class GarminHUD {
             return (char) n;
     }
 
+    private int errorCode = 0;
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
     private boolean SendPacket(char[] pBuf, int length_of_data) {
         if (!isUpdatable()) {
+            errorCode = 1;
             return false;
         }
         updateCount++;
@@ -62,8 +69,11 @@ public class GarminHUD {
             packet[x] = (byte) pBuf[x];
         }
 
-        bt.send(packet, false);
-        return true;
+        boolean result = bt.send(packet, false);
+        if (!result) {
+            errorCode = 2;
+        }
+        return result;
     }
 
     public boolean getSendResult() {

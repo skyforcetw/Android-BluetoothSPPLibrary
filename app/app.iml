@@ -105,5 +105,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="library" exported="" />
     <orderEntry type="library" exported="" name="Gradle: android-android-21" level="project" />
+    <orderEntry type="module" module-name="library" exported="" />
+    <orderEntry type="module" module-name="library" exported="" />
+    <orderEntry type="module" module-name="library" exported="" />
   </component>
 </module>

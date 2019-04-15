@@ -25,6 +25,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.macroyau.blue2serial.BluetoothSerial;
+import com.macroyau.blue2serial.BluetoothSerialListener;
+
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.BluetoothConnectionListener;
 import app.akexorcist.bluetotohspp.library.BluetoothSPP.OnDataReceivedListener;
@@ -35,6 +38,7 @@ import sky4s.garminhud.eOutAngle;
 
 public class SimpleActivity extends Activity {
     BluetoothSPP bt;
+//    BluetoothSerial bluetoothSerial;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +88,48 @@ public class SimpleActivity extends Activity {
                 }
             }
         });
+
+
+        // Create a new instance of BluetoothSerial
+//        bluetoothSerial = new BluetoothSerial(this, btListener);
+    }
+    BTListener btListener=new BTListener();
+    class BTListener implements BluetoothSerialListener {
+
+        @Override
+        public void onBluetoothNotSupported() {
+
+        }
+
+        @Override
+        public void onBluetoothDisabled() {
+
+        }
+
+        @Override
+        public void onBluetoothDeviceDisconnected() {
+
+        }
+
+        @Override
+        public void onConnectingBluetoothDevice() {
+
+        }
+
+        @Override
+        public void onBluetoothDeviceConnected(String s, String s1) {
+
+        }
+
+        @Override
+        public void onBluetoothSerialRead(String s) {
+
+        }
+
+        @Override
+        public void onBluetoothSerialWrite(String s) {
+
+        }
     }
 
     public void onDestroy() {
@@ -97,6 +143,8 @@ public class SimpleActivity extends Activity {
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(intent, BluetoothState.REQUEST_ENABLE_BT);
         } else {
+            bluetoothSerial.setup();
+
             if (!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER);
